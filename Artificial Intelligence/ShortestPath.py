@@ -1,6 +1,6 @@
 # Alan Seksenali
 # Sphere: Artificial Intelligence
-# Topic: finding a shortest path for a robot vacuum in an 8x8 grid board
+# Topic: finding a shortest path for a robot vacuum in an 8x8 grid board using either UCS or A* algorithm
 
 def heuristic(pos, goal):
     # Compute the Chebyshev distance from current position to the goal:
