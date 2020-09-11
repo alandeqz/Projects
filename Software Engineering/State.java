@@ -1,8 +1,3 @@
-package kz.edu.nu.cs.se;
-
-/**
- * State abstraction for vending machine exercise
- */
 public abstract class State {
     
     /**
