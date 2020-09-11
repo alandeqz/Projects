@@ -1,5 +1,3 @@
-package kz.edu.nu.cs.se;
-
 public class IdleState extends State {
 	public IdleState(VendingMachine vm) {
 		vendingMachine = vm;
