@@ -1,5 +1,3 @@
-package kz.edu.nu.cs.se;
-
 public class PaidState extends State {
 	public PaidState(VendingMachine vm) {
 		vendingMachine = vm;
