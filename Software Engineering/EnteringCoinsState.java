@@ -1,5 +1,3 @@
-package kz.edu.nu.cs.se;
-
 public class EnteringCoinsState extends State {
 	public EnteringCoinsState(VendingMachine vm) {
 		vendingMachine = vm;
