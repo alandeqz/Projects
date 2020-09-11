@@ -1,5 +1,3 @@
-package kz.edu.nu.cs.se;
-
 public class VendingMachine {
     public final State idle = new IdleState(this);
     public final State enteringCoins = new EnteringCoinsState(this);
