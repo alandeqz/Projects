@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Dynamic Todo List</title>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script type="text/javascript">
+
+function updateList(items) {
+    $("#my-list").html("");
+    items.forEach(function (e, item) {
+        $("#my-list").append("<li>" + e + "</li><button onClick='deleteItem(" + item + ")'>Delete</button>");
+    });
+}
+
+function getListItems() {
+    $.ajax({
+        url : 'services/items',
+        dataType : 'json',
+        success : function(r) {
+            updateList(r);
+        }
+    });
+}
+
+function sendListItem() {
+    var listItem = $("#texttosend").val();
+
+    $.post("services/items", { newEntry: listItem}, function() {
+        getListItems();
+    });
+}
+
+function clearList() {
+    $.ajax({
+        url: 'services/items',
+        type: 'DELETE',
+        success: function(r) {
+            getListItems();
+        },
+        error: function(error) {
+            console.log(error);
+        }
+    })
+}
+
+function deleteItem(item) {
+    $.ajax({
+        url: 'services/items/' + item,
+        type: 'DELETE',
+        success: function(r) {
+            getListItems();
+        },
+        error: function(error) {
+            console.log(error);
+        }
+    });
+}
+
+$(document).ready(function () {
+    getListItems();
+
+    $("#send-item").on('click', function () {
+        sendListItem();
+    });
+    $("#clear-list").on('click', function () {
+        clearList();
+    });
+});
+
+</script>
+</head>
+<body>
+<h2>Dynamic Todo List Exercise</h2>
+
+<p style="font-weight: bold">
+    Instructions:
+</p>
+
+<ul style="font-style: italic">
+    <li>
+        If you want to create a new task, type in your task name, and press the "Submit" button!
+    </li>
+    <li>
+        If you want to delete a specific task, press the corresponding button under the task or event!
+    </li>
+    <li>
+        If you want to clear the entire list, press the "Clear the list" button near the "Submit" button!
+    </li>
+</ul>
+
+Enter your task: <input type="text" id="texttosend"><br>
+<button id="send-item" type="button" >Submit</button>
+<button id="clear-list" type="button">Clear the list</button>
+<ul id="my-list"></ul>
+
+
+<p>
+<a href="services/items">Link to List Items API</a>
+</p>
+
+<p style="font-weight: bold">
+    Thank you for using this service!
+</p>
+
+</body>
+</html>
